@@ -1,0 +1,7 @@
+<mvc:View controllerName="demoapp.controller.demoApp"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="Demo application">
+        <Label id="Label" text="HelloWorld!"></Label>
+    </Page>
+</mvc:View>
