@@ -1,7 +1,52 @@
-<mvc:View controllerName="demoapp.controller.demoApp"
-    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m">
-    <Page id="page" title="Demo application">
-        <Label id="Label" text="HelloWorld!"></Label>
+<mvc:View
+    controllerName="demoapp.controller.demoApp"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:f="sap.ui.layout.form"
+>
+    <Page
+        id="page"
+        title="Demo application"
+    >
+        <SplitContainer
+            id="Splitcontainer"
+            initialMaster="Masterpage"
+            initialDetail="Detailpage"
+        >
+            <masterPages>
+                <Page id="Masterpage">
+                    <smartFilterBar:SmartFilterBar
+                        id="smartFilterBar"
+                        entitySet="Orders"
+                        enableBasicSearch="true"
+                    >
+                        <smartFilterBar:controlConfiguration>
+                            <smartFilterBar:ControlConfiguration
+                                id="orderIDFilter"
+                                key="OrderID"
+                                visibleInAdvancedArea="true"
+                            >
+                                <smartFilterBar:defaultFilterValues />
+                            </smartFilterBar:ControlConfiguration>
+
+                            <smartFilterBar:ControlConfiguration
+                                id="customerIDFilter"
+                                key="CustomerID"
+                                visibleInAdvancedArea="true"
+                            >
+                                <smartFilterBar:defaultFilterValues />
+                            </smartFilterBar:ControlConfiguration>
+                        </smartFilterBar:controlConfiguration>
+                    </smartFilterBar:SmartFilterBar>
+                </Page>
+            </masterPages>
+
+            <detailPages>
+                <Page id="Detailpage" />
+            </detailPages>
+        </SplitContainer>
     </Page>
 </mvc:View>
