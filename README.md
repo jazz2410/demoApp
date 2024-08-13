@@ -1,1 +1,2 @@
-Demo application TEST
+Demo application
+UI5 Application
