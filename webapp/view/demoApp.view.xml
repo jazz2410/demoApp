@@ -123,7 +123,17 @@
                                 editable="false"
                             />
                         </f:SimpleForm>
-                    </Panel>
+                     </Panel>
+
+                     <Panel id="orderDetails" class="sapUiResponsiveMargin" width="auto">
+                        <smartTable:SmartTable id="orderDetailsTable" entitySet="Order_Details"  
+                        tableType="ResponsiveTable" header="Order details" showRowCount="true"
+                        enableAutoBinding="false" class="sapUiResponsiveContentPadding" enableAutoColumnWidth="true" editTogglable="false" 
+                        initiallyVisibleFields="OrderID,ProductID,UnitPrice,Quantity,Discount">
+                        <Table id="orderDetailsTab" selectionChange="onSalesItemPress" mode="SingleSelectMaster"/>
+                    </smartTable:SmartTable>
+                     </Panel>
+
                 </Page>
             </detailPages>
         </SplitContainer>
