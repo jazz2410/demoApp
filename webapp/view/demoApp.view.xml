@@ -41,11 +41,90 @@
                             </smartFilterBar:ControlConfiguration>
                         </smartFilterBar:controlConfiguration>
                     </smartFilterBar:SmartFilterBar>
+
+                    <smartTable:SmartTable
+                        id="smartTable"
+                        smartFilterId="smartFilterBar"
+                        entitySet="Orders"
+                        tableType="ResponsiveTable"
+                        header="Order items"
+                        showRowCount="true"
+                        enableAutoBinding="true"
+                        class="sapUiResponsiveContentPadding"
+                        enableAutoColumnWidth="true"
+                        editTogglable="false"
+                        initiallyVisibleFields="OrderID,CustomerID"
+                    >
+                        <Table
+                            id="table"
+                            selectionChange="onRowSelect"
+                            mode="SingleSelectMaster"
+                        />
+                    </smartTable:SmartTable>
                 </Page>
             </masterPages>
 
             <detailPages>
-                <Page id="Detailpage" />
+                <Page id="Detailpage">
+                    <Panel
+                        id="orderDetailsPanel"
+                        headerText="Order details"
+                        class="sapUiResponsiveMargin"
+                        width="auto"
+                    >
+                        <f:SimpleForm
+                            id="simpleForm"
+                            editable="false"
+                            layout="ColumnLayout"
+                        >
+                            <Label
+                                id="OrderField"
+                                text="Order ID"
+                            />
+                            <Input
+                                id="OrderFieldInput"
+                                value="{OrderID}"
+                                editable="false"
+                            />
+                            <Label
+                                id="CustomerField"
+                                text="Customer"
+                            />
+                            <Input
+                                id="CustomerFieldInput"
+                                value="{CustomerID}"
+                                editable="false"
+                            />
+                            <Label
+                                id="OrderDate"
+                                text="Order date"
+                            />
+                            <Input
+                                id="OrderDateInput"
+                                value="{OrderDate}"
+                                editable="false"
+                            />
+                            <Label
+                                id="EmployeeIDField"
+                                text="Employee"
+                            />
+                            <Input
+                                id="EmployeeIDFieldInput"
+                                value="{EmployeeID}"
+                                editable="false"
+                            />
+                            <Label
+                                id="ShipNameField"
+                                text="Ship Name"
+                            />
+                            <Input
+                                id="ShipNameFieldInput"
+                                value="{ShipName}"
+                                editable="false"
+                            />
+                        </f:SimpleForm>
+                    </Panel>
+                </Page>
             </detailPages>
         </SplitContainer>
     </Page>
