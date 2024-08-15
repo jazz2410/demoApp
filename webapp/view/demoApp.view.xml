@@ -22,13 +22,14 @@
                     <smartFilterBar:SmartFilterBar
                         id="smartFilterBar"
                         entitySet="Orders"
-                        enableBasicSearch="true"
+                        enableBasicSearch="true" 
                     >
                         <smartFilterBar:controlConfiguration>
                             <smartFilterBar:ControlConfiguration
                                 id="orderIDFilter"
                                 key="OrderID"
                                 visibleInAdvancedArea="true"
+                                
                             >
                                 <smartFilterBar:defaultFilterValues />
                             </smartFilterBar:ControlConfiguration>

@@ -1,6 +1,6 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "sap/ui/model/json/JSONModel"
+    "sap/ui/model/json/JSONModel",
 ],
 function (Controller,JSONModel) {
     "use strict";
@@ -21,6 +21,17 @@ function (Controller,JSONModel) {
             this.getView().setModel(editableFieldsModel,'editableFieldsModel');
             var changedValuesModel = new JSONModel(changedValues);
             this.getView().setModel(changedValuesModel,'changedValuesModel');
+
+            var filter = this.byId('orderIDFilter');
+            var example = {
+                high : undefined,
+                low : 123,
+                operator : 'EQ',
+                sign : 'I'
+            }
+            var SelectOption = new sap.ui.comp.smartfilterbar.SelectOption("OrderIDFilter",example);
+            filter.addDefaultFilterValue(SelectOption);
+            console.log(SelectOption);
            
         },
         onRowSelect: function(oEvent){
