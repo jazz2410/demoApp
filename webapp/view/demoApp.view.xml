@@ -121,6 +121,7 @@
                                 value="{EmployeeID}"
                                 editable="{editableFieldsModel>/state}"
                                 change="onChangedEmployee"
+                                valueLiveUpdate="true"
                             />
                             <Label
                                 id="ShipNameField"
@@ -131,6 +132,7 @@
                                 value="{ShipName}"
                                 editable="{editableFieldsModel>/state}"
                                 change="onChangedShipName"
+                                valueLiveUpdate="true"
                             />
                         </f:SimpleForm>
                      </Panel>
