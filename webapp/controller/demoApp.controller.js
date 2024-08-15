@@ -23,32 +23,18 @@ sap.ui.define([
                 var changedValuesModel = new JSONModel(changedValues);
                 this.getView().setModel(changedValuesModel, 'changedValuesModel');
 
-                var filter = this.byId('orderIDFilter');
-
             },
             onRowSelect: function (oEvent) {
+
+                this._resetChangedModel();
                 const sPath = oEvent.getSource()._aSelectedPaths[0]; // returns /Orders(XXX)
                 this.byId('orderDetailsPanel').bindElement(sPath);
                 const itemsPath = sPath + '/Order_Details'; //returns /Orders(XXX)/Order_Details - Navigation property
                 this.byId("orderDetailsTable").setTableBindingPath(itemsPath);
                 this.byId("orderDetailsTable").rebindTable(true);
 
-                const columns = this.byId("orderDetailsTable").getTable().getColumns();
-                var i = 0;
-                for (i = 0; i < columns.length; i++) {
-                    const header = columns[i].getHeader();
-                    switch (header.mProperties.text) {
-                        case 'OrderID':
-                            header.mProperties.text = 'Order ID';
-                            break;
-                        case 'ProductID':
-                            header.mProperties.text = 'Product ID';
-                            break;
-                        case 'UnitPrice':
-                            header.mProperties.text = 'Unit Price';
-                            break;
-                    }
-                }
+                this._formatTable();
+
             },
             onChangeHeader: function () {
                 var state = this.getView().getModel('editableFieldsModel').getProperty('/state');
@@ -82,16 +68,38 @@ sap.ui.define([
                 this.getView().getModel().update(sPath, data, {
                     success: function (response) {
                         this.getView().getModel('editableFieldsModel').setProperty('/state', false);
+                        this._resetChangedModel();
                     }.bind(this),
                     error: function (error) {
                         MessageToast.show("Feature not supported!");
                         this.getView().getModel('editableFieldsModel').setProperty('/state', false);
                         this.getView().getModel().refresh(true);
+                        this._resetChangedModel();
                     }.bind(this),
                 }
                 )
-
-
-            }
+            },
+            _resetChangedModel: function(){
+                this.getView().getModel('changedValuesModel').setProperty('/EmployeeID', undefined);
+                this.getView().getModel('changedValuesModel').setProperty('/ShipName', undefined);
+            },
+            _formatTable: function(){
+                const columns = this.byId("orderDetailsTable").getTable().getColumns();
+                var i = 0;
+                for (i = 0; i < columns.length; i++) {
+                    const header = columns[i].getHeader();
+                    switch (header.mProperties.text) {
+                        case 'OrderID':
+                            header.mProperties.text = 'Order ID';
+                            break;
+                        case 'ProductID':
+                            header.mProperties.text = 'Product ID';
+                            break;
+                        case 'UnitPrice':
+                            header.mProperties.text = 'Unit Price';
+                            break;
+                    }
+                }
+            },
         });
     });
