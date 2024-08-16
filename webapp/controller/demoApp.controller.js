@@ -18,6 +18,8 @@ sap.ui.define([
                     ShipName: undefined,
                 }
 
+
+                console.log(this.getView().getModel());
                 var editableFieldsModel = new JSONModel(editableFields);
                 this.getView().setModel(editableFieldsModel, 'editableFieldsModel');
                 var changedValuesModel = new JSONModel(changedValues);
@@ -34,7 +36,7 @@ sap.ui.define([
                 this.byId("orderDetailsTable").rebindTable(true);
 
                 this._formatTable();
-
+                this._initSmartFilter();
             },
             onChangeHeader: function () {
                 var state = this.getView().getModel('editableFieldsModel').getProperty('/state');
@@ -101,5 +103,25 @@ sap.ui.define([
                     }
                 }
             },
+            _initSmartFilter: function(){
+                var smartFilter = this.byId('smartFilterBar');
+                var controlConfiguration = smartFilter.getControlConfiguration();
+                var customerConfiguration = controlConfiguration.find( function(ControlItem){
+                    return ControlItem.getKey() === 'CustomerID'
+                });
+                
+                if(customerConfiguration){
+                    var OModel = this.getView().getModel();
+                    console.log(OModel);
+                    OModel.read('/Customers',{
+                        success: function(response) {
+                            console.log(response)
+                        },
+                        error: function(error){
+                            console.log(error);
+                        },
+                    })
+                }
+            }
         });
     });
