@@ -18,12 +18,13 @@ sap.ui.define([
                     ShipName: undefined,
                 }
 
-
-                console.log(this.getView().getModel());
                 var editableFieldsModel = new JSONModel(editableFields);
                 this.getView().setModel(editableFieldsModel, 'editableFieldsModel');
                 var changedValuesModel = new JSONModel(changedValues);
                 this.getView().setModel(changedValuesModel, 'changedValuesModel');
+
+                console.log(this.getOwnerComponent().getModel());
+                this._initSmartFilter();
 
             },
             onRowSelect: function (oEvent) {
@@ -36,7 +37,7 @@ sap.ui.define([
                 this.byId("orderDetailsTable").rebindTable(true);
 
                 this._formatTable();
-                this._initSmartFilter();
+
             },
             onChangeHeader: function () {
                 var state = this.getView().getModel('editableFieldsModel').getProperty('/state');
@@ -106,21 +107,34 @@ sap.ui.define([
             _initSmartFilter: function(){
                 var smartFilter = this.byId('smartFilterBar');
                 var controlConfiguration = smartFilter.getControlConfiguration();
-                var customerConfiguration = controlConfiguration.find( function(ControlItem){
+                var fieldConfiguration = controlConfiguration.find( function(ControlItem){
                     return ControlItem.getKey() === 'CustomerID'
                 });
                 
-                if(customerConfiguration){
-                    var OModel = this.getView().getModel();
-                    console.log(OModel);
+                if(fieldConfiguration){
+                    var OModel = this.getOwnerComponent().getModel();
                     OModel.read('/Customers',{
                         success: function(response) {
-                            console.log(response)
+                            console.log(response.results)
+                            var items = response.results.map(function(item){
+                                return new sap.ui.core.Item({
+                                    key: item.CustomerID,
+                                    text: item.CompanyName,
+                                })
+                            });
+                        console.log(items);
+                        var Combobox = new sap.m.ComboBox({
+                            items: items
+                        });
                         },
                         error: function(error){
                             console.log(error);
                         },
-                    })
+                    });
+                    
+
+
+
                 }
             }
         });

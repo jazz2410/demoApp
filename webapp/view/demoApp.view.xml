@@ -29,9 +29,7 @@
                                 id="orderIDFilter"
                                 key="OrderID"
                                 visibleInAdvancedArea="true"
-                                
                             >
-                                <smartFilterBar:defaultFilterValues />
                             </smartFilterBar:ControlConfiguration>
 
                             <smartFilterBar:ControlConfiguration
@@ -39,7 +37,6 @@
                                 key="CustomerID"
                                 visibleInAdvancedArea="true"
                             >
-                                <smartFilterBar:defaultFilterValues />
                             </smartFilterBar:ControlConfiguration>
                         </smartFilterBar:controlConfiguration>
                     </smartFilterBar:SmartFilterBar>
