@@ -37,6 +37,13 @@
                                 key="CustomerID"
                                 visibleInAdvancedArea="true"
                             >
+
+                            <smartFilterBar:customControl>
+                                <MultiComboBox id="multiCombo" items="{path : '/Customers'}">
+                                    <core:Item id="customerID" key="{CustomerID}" text="{CustomerID}" />
+                                </MultiComboBox>
+                            </smartFilterBar:customControl>
+
                             </smartFilterBar:ControlConfiguration>
                         </smartFilterBar:controlConfiguration>
                     </smartFilterBar:SmartFilterBar>
@@ -53,6 +60,7 @@
                         enableAutoColumnWidth="true"
                         editTogglable="false"
                         initiallyVisibleFields="OrderID,CustomerID"
+                        beforeRebindTable="onBeforeRebindTable"
                     >
                         <Table
                             id="table"

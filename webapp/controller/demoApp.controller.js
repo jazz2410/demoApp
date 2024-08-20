@@ -1,9 +1,10 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
-    "sap/m/MessageToast"
+    "sap/m/MessageToast",
+    "sap/ui/model/FilterOperator"
 ],
-    function (Controller, JSONModel,MessageToast) {
+    function (Controller, JSONModel,MessageToast,FilterOperator,) {
         "use strict";
 
         return Controller.extend("demoapp.controller.demoApp", {
@@ -22,9 +23,6 @@ sap.ui.define([
                 this.getView().setModel(editableFieldsModel, 'editableFieldsModel');
                 var changedValuesModel = new JSONModel(changedValues);
                 this.getView().setModel(changedValuesModel, 'changedValuesModel');
-
-                console.log(this.getOwnerComponent().getModel());
-                this._initSmartFilter();
 
             },
             onRowSelect: function (oEvent) {
@@ -104,38 +102,20 @@ sap.ui.define([
                     }
                 }
             },
-            _initSmartFilter: function(){
-                var smartFilter = this.byId('smartFilterBar');
-                var controlConfiguration = smartFilter.getControlConfiguration();
-                var fieldConfiguration = controlConfiguration.find( function(ControlItem){
-                    return ControlItem.getKey() === 'CustomerID'
-                });
+            onBeforeRebindTable: function(oEvent){
+                var mBindingParams = oEvent.getParameter("bindingParams");
+                var selectedItems = this.byId('multiCombo').getSelectedItems();
                 
-                if(fieldConfiguration){
-                    var OModel = this.getOwnerComponent().getModel();
-                    OModel.read('/Customers',{
-                        success: function(response) {
-                            console.log(response.results)
-                            var items = response.results.map(function(item){
-                                return new sap.ui.core.Item({
-                                    key: item.CustomerID,
-                                    text: item.CompanyName,
-                                })
-                            });
-                        console.log(items);
-                        var Combobox = new sap.m.ComboBox({
-                            items: items
-                        });
-                        },
-                        error: function(error){
-                            console.log(error);
-                        },
-                    });
-                    
+                selectedItems.forEach(function(selectedItem){
+                    var Filter = new sap.ui.model.Filter({
+                        path: 'CustomerID',
+                        operator: FilterOperator.Contains,
+                        value1: selectedItem.getText()});
 
+                    mBindingParams.filters.push(Filter);
+                })
+            },
 
-
-                }
-            }
+        
         });
     });
