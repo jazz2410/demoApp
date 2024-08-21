@@ -109,21 +109,59 @@
         >
             <smartTable:SmartTable
                 id="supplierTable"
-                entitySet="Suppliers"
                 tableType="ResponsiveTable"
                 showRowCount="true"
                 enableAutoBinding="true"
                 class="sapUiResponsiveContentPadding"
                 enableAutoColumnWidth="true"
                 editTogglable="false"
-                initiallyVisibleFields="SupplierID,CompanyName,ContactName"
-                
             >
                 <Table
                     id="table"
                     selectionChange="onRowSelect"
                     mode="SingleSelectMaster"
-                />
+                    items="{/Suppliers}"
+                >
+                <columns>
+
+                    <Column id="SupplierIDColumn" width="100px">
+                        <Label id="SupplierIDLabel" text="Supplier ID"></Label>
+                    </Column>
+                    <Column id="CompanyNameColumn" width="200px">
+                        <Label id="CompanyNameLabel" text="Company name"></Label>
+                    </Column>
+                    <Column id="ContactNameColumn" width="200px">
+                        <Label id="ContactNameLabel" text="Contact"></Label>
+                    </Column>
+                    <Column id="AddressColumn" width="200px">
+                        <Label id="AddressLabel" text="Address"></Label>
+                    </Column>
+                    <Column id="CityColumn">
+                        <Label id="CityLabel" text="City"></Label>
+                    </Column>
+                    <Column id="CountryColumn">
+                        <Label id="CountryLabel" text="Country"></Label>
+                    </Column>
+
+                </columns>
+
+                <items>
+
+                    <ColumnListItem id="SuppllierColumnList">
+                        <cells>
+                          <Text id="SupplierID" text="{SupplierID}" />
+                          <Text id="CompanyName" text="{CompanyName}" />
+                          <Text id="ContactName" text="{ContactName}" />
+                          <Text id="Address" text="{Address}" />
+                          <Text id="City" text="{Address}" />
+                          <Text id="Country" text="{Country}" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+
+
+
+            </Table>
             </smartTable:SmartTable>
         </Panel>
     </Page>

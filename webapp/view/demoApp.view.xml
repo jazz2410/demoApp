@@ -146,6 +146,7 @@
                         <smartTable:SmartTable id="orderDetailsTable" entitySet="Order_Details"  
                         tableType="ResponsiveTable" header="Order items" showRowCount="true"
                         enableAutoBinding="false" class="sapUiResponsiveContentPadding" enableAutoColumnWidth="true" editTogglable="false" 
+                        beforeRebindTable="onBeforeDetailsTable"
                         initiallyVisibleFields="OrderID,ProductID,UnitPrice,Quantity,Discount">
                         <Table id="orderDetailsTab" selectionChange="onItemPress" mode="SingleSelectMaster">
                         </Table>
