@@ -4,6 +4,7 @@
     displayBlock="true"
     xmlns="sap.m"
     xmlns:core="sap.ui.core"
+    xmlns:smartTable="sap.ui.comp.smarttable"
     xmlns:f="sap.ui.layout.form"
 >
     <Page id="itemDetailsPage">
@@ -98,6 +99,32 @@
                     editable="false"
                 />
             </f:SimpleForm>
+        </Panel>
+
+        <Panel
+            id="SuppliersPanel"
+            headerText="Suppliers"
+            class="sapUiResponsiveMargin"
+            width="auto"
+        >
+            <smartTable:SmartTable
+                id="supplierTable"
+                entitySet="Suppliers"
+                tableType="ResponsiveTable"
+                showRowCount="true"
+                enableAutoBinding="true"
+                class="sapUiResponsiveContentPadding"
+                enableAutoColumnWidth="true"
+                editTogglable="false"
+                initiallyVisibleFields="SupplierID,CompanyName,ContactName"
+                
+            >
+                <Table
+                    id="table"
+                    selectionChange="onRowSelect"
+                    mode="SingleSelectMaster"
+                />
+            </smartTable:SmartTable>
         </Panel>
     </Page>
 </mvc:View>

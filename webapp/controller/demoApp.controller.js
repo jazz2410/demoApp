@@ -102,11 +102,11 @@ sap.ui.define([
                     }
                 }
             },
+            ////For combo box in SmartFilterbar, the values from combo box need to be passed to binding parameter
             onBeforeRebindTable: function(oEvent){
                 var mBindingParams = oEvent.getParameter("bindingParams");
                 var selectedItems = this.byId('multiCombo').getSelectedItems();
                 
-                //For custom controls in SmartFilterbar, the values from combo box need to be passed to binding parameter 
                 selectedItems.forEach(function(selectedItem){
                     var Filter = new sap.ui.model.Filter({
                         path: 'CustomerID',

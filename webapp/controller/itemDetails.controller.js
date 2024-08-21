@@ -20,6 +20,7 @@ sap.ui.define([
                 const ProductID = parameters.ProductID;
                 var sPath = `/Products(${ProductID})`;
                 this.getView().byId('itemDetailsForm').bindElement(sPath);
+
             }
 
         
