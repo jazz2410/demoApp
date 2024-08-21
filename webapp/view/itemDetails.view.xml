@@ -1,0 +1,103 @@
+<mvc:View
+    controllerName="demoapp.controller.itemDetails"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+>
+    <Page id="itemDetailsPage">
+        <Panel
+            id="itemDetailsPanel"
+            headerText="Item details"
+            class="sapUiResponsiveMargin"
+            width="auto"
+        >
+            <f:SimpleForm
+                id="itemDetailsForm"
+                editable="false"
+                layout="ColumnLayout"
+            >
+                <Label
+                    id="ProductField"
+                    text="Product"
+                />
+                <Input
+                    id="ProductFieldInput"
+                    value="{ProductID}"
+                    editable="false"
+                />
+
+                <Label
+                    id="ProductNameField"
+                    text="Name"
+                />
+                <Input
+                    id="ProductNameInput"
+                    value="{ProductName}"
+                    editable="false"
+                />
+
+                <Label
+                    id="CategoryIDField"
+                    text="Category"
+                />
+                <Input
+                    id="CategoryIDInput"
+                    value="{CategoryID}"
+                    editable="false"
+                />
+
+                <Label
+                    id="SupplierIDField"
+                    text="Supplier"
+                />
+                <Input
+                    id="SupplierIDInput"
+                    value="{SupplierID}"
+                    editable="false"
+                />
+
+                <Label
+                    id="UnitPriceField"
+                    text="Unit price"
+                />
+                <Input
+                    id="UnitPriceInput"
+                    value="{UnitPrice}"
+                    editable="false"
+                />
+
+                <Label
+                    id="UnitsInStockField"
+                    text="Units in stock"
+                />
+                <Input
+                    id="UnitsInStockInput"
+                    value="{UnitsInStock}"
+                    editable="false"
+                />
+
+                <Label
+                    id="UnitsOnOrderField"
+                    text="Units in order"
+                />
+                <Input
+                    id="UnitsOnOrderInput"
+                    value="{UnitsOnOrder}"
+                    editable="false"
+                />
+
+                <Label
+                    id="DiscontinuedField"
+                    text="Discontinued"
+                />
+                <Input
+                    id="DiscontinuedInput"
+                    value="{Discontinued}"
+                    editable="false"
+                />
+            </f:SimpleForm>
+        </Panel>
+    </Page>
+</mvc:View>

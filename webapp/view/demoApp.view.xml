@@ -147,7 +147,7 @@
                         tableType="ResponsiveTable" header="Order items" showRowCount="true"
                         enableAutoBinding="false" class="sapUiResponsiveContentPadding" enableAutoColumnWidth="true" editTogglable="false" 
                         initiallyVisibleFields="OrderID,ProductID,UnitPrice,Quantity,Discount">
-                        <Table id="orderDetailsTab" selectionChange="onSalesItemPress" mode="SingleSelectMaster">
+                        <Table id="orderDetailsTab" selectionChange="onItemPress" mode="SingleSelectMaster">
                         </Table>
                     </smartTable:SmartTable>
                      </Panel>

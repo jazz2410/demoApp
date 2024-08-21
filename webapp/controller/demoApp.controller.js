@@ -106,6 +106,7 @@ sap.ui.define([
                 var mBindingParams = oEvent.getParameter("bindingParams");
                 var selectedItems = this.byId('multiCombo').getSelectedItems();
                 
+                //For custom controls in SmartFilterbar, the values from combo box need to be passed to binding parameter 
                 selectedItems.forEach(function(selectedItem){
                     var Filter = new sap.ui.model.Filter({
                         path: 'CustomerID',
@@ -115,7 +116,22 @@ sap.ui.define([
                     mBindingParams.filters.push(Filter);
                 })
             },
+            onItemPress: function(oEvent){
+                var item = oEvent.getSource().getSelectedItems()[0];
+                var OrderID = item.getBindingContext().getProperty('OrderID');
+                var ProductID = item.getBindingContext().getProperty('ProductID');
+                
+                this.getView().byId('orderDetailsTab').removeSelections();
+                const oRouter = this.getOwnerComponent().getRouter();
+                oRouter.navTo("ItemDetails",{
+                    OrderID :OrderID,
+                    ProductID : ProductID
+                });
 
+
+
+
+            }
         
         });
     });
