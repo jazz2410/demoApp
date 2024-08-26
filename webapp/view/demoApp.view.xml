@@ -83,6 +83,7 @@
                         <contentLeft>
                           <Button id="salesHeaderUpdate" text="Change" press="onChangeHeader"></Button>
                           <Button id="salesHeaderSave" text="Save" press="onSaveHeader"></Button>
+                          <Button id="displayJSON" text="Display JSON" press="onJSON"/>
                         </contentLeft>
                       </Bar>
                         <f:SimpleForm

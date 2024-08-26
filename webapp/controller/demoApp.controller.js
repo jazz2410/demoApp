@@ -19,10 +19,13 @@ sap.ui.define([
                     ShipName: undefined,
                 }
 
+
+
                 var editableFieldsModel = new JSONModel(editableFields);
                 this.getView().setModel(editableFieldsModel, 'editableFieldsModel');
                 var changedValuesModel = new JSONModel(changedValues);
                 this.getView().setModel(changedValuesModel, 'changedValuesModel');
+
 
             },
             onRowSelect: function (oEvent) {
@@ -135,6 +138,53 @@ sap.ui.define([
             onBeforeDetailsTable: function() {
                 this._formatTable("orderDetailsTable");
                
+            },
+            onJSON: function(){
+                if(!this._oDialog){
+                    this._oDialog = sap.ui.xmlfragment(this.getView().getId(),"demoapp.view.JSONDisplay", this);
+                    this.getView().addDependent(this._oDialog);
+                }
+
+
+                var order =  this.byId("orderDetailsPanel").getBindingContext().getProperty('OrderID');
+                var sPath = `/Orders(${order})`;
+                var oModel = this.getView().getModel();
+                oModel.read(sPath,{
+                    success: function(response){
+
+                        var data = {
+                            OrderID : response.OrderID,
+                            CustomerID : response.CustomerID,
+                            EmployeeID : response.EmployeeID,
+                            Freight: response.Freight,
+                            ShipAddress : response.ShipAddress,
+                            ShipCity : response.ShipCity,
+                            ShipCountry : response.ShipCountry,
+                        }
+
+                        var payLoadData = {
+                            payload : []
+                        };
+                        var payloadModel = new JSONModel(payLoadData);
+                        var dataModel = new JSONModel(data);
+                        var json_string = JSON.stringify(dataModel.oData);
+                        json_string = JSON.stringify(JSON.parse(json_string),null,2);                   
+                        payloadModel.setProperty('/payload',json_string);
+                        this._oDialog.setModel(payloadModel,'payloadModel');
+                        this._oDialog.open();
+
+
+
+                    }.bind(this),
+                    error: function(){
+                        MessageToast.show("Data could not be retrieved from backend!");
+                    },
+                })
+
+            },
+            closePayload: function(){
+                this._oDialog.getModel('payloadModel').setProperty('/payload',undefined);
+                this._oDialog.close();
             }
         
         });
